@@ -26,16 +26,29 @@ class Game:
         #Input joueur choix colonne
         while True:
             y = int(input("Choix de la colonne entre 1 et 3 : "))
-            if y <= 3 and y >= 1:
+            y -= 1 #Pour correspondre aux tableaux
+            if y <= 2 and y >= 0:
                 break
         #Calcul position vertical (gravité)
-        
-        
-        
-        
+        self.playable = True
+        self.ligne = 0
+        while True:
+            self.val_ligne = self.plateaux[joueur][self.ligne][y]
+            if self.val_ligne != 0 and self.ligne < 2:
+                self.ligne += 1
+            elif self.val_ligne == 0:
+                break
+            else:
+                self.playable = False
+                break
         #Mise à jour plateaux (nJoueur, ligne, colonne)
-        self.plateaux[joueur][1][y]=self.tirage_de()
+        if self.playable == True:
+            self.plateaux[joueur][self.ligne][y]=self.tirage_de()
+        else:
+            print("La colonne est deja pleine")
         y=0
+            
+        
             
     def afficher_plateau(self):
         #Affiche plateau J1
