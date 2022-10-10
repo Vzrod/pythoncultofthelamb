@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Oct  5 14:47:09 2022
-
 @author: arthu
 """
 
@@ -46,9 +45,16 @@ class Game:
             self.plateaux[joueur][self.ligne][y]=self.tirage_de()
         else:
             print("La colonne est deja pleine")
+            self.jouer(joueur)
         y=0
             
         
+    def calcul_point(self, joueur):
+         
+        
+        
+        
+        joueur.point=int()
             
     def afficher_plateau(self):
         #Affiche plateau J1
@@ -70,8 +76,3 @@ class Game:
                else:
                    print(self.plateaux[1][i][j], end="")
             print("|")
-        
-    
-        
-
-
