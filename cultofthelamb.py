@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+      # -*- coding: utf-8 -*-
 """
 Created on Wed Oct  5 14:47:09 2022
 @author: arthu
@@ -14,7 +14,7 @@ class Game:
         """
         Initialisation plateaux + numéros de player , plateaux[player][ligne (bas --> haut)][case (gauche --> droite)] 
         """
-        self.plateaux=[[[1,5,2],[0,5,2],[0,5,0]],[[0,1,0],[0,3,0],[0,0,0]]]
+        self.plateaux=[[[0,0,0],[0,0,0],[0,0,0]],[[0,0,0],[0,0,0],[0,0,0]]]
         self.P1=int(0)
         self.P2=int(1)
         self.scores = [0, 0]
@@ -57,20 +57,23 @@ class Game:
         for i in range(0,3):
             if self.plateaux[enemy][self.playedColums][i] == self.devalue: 
                 self.plateaux[enemy][self.playedColums][i] = 0
-            
-            
+        """for _ in range(2):
+            for z in range(0,2):
+                if self.plateaux[enemy][self.playedColums][z] == 0 and self.plateaux[enemy][self.playedColums][z+1] != 0:
+                    self.plateaux[enemy][self.playedColums][z] = self.plateaux[enemy][self.playedColums][z+1]
+            """
         
 
         
     def point(self, player):
-         colonne = [0, 0, 0]
-         score = [0, 0, 0]
-         for i in range(0,3):
-             for y in range(0,3):
-                 colonne[y] = self.plateaux[player][y][i]
-             for x in range(1,7):
-                 score[i] += (colonne.count(x)**2)*x
-         self.scores[player] = sum(score)
+        colonne = [0, 0, 0]
+        score = [0, 0, 0]
+        for i in range(0,3):
+            for y in range(0,3):
+                colonne[y] = self.plateaux[player][y][i]
+            for x in range(1,7):
+                score[i] += (colonne.count(x)**2)*x
+        self.scores[player] = sum(score)
             
             
     def printPlate(self):
@@ -87,9 +90,31 @@ class Game:
         #Affiche plateau P2
         for i in range(0,3):
             for j in range(0,3):
-               print("|", end="")
-               if (self.plateaux[1][i][j]) == 0:
-                   print(" ", end="")
-               else:
-                   print(self.plateaux[1][i][j], end="")
+                print("|", end="")
+                if (self.plateaux[1][i][j]) == 0:
+                    print(" ", end="")
+                else:
+                    print(self.plateaux[1][i][j], end="")
             print("|")
+            
+            
+    def endGame(self):
+        for player in range(0,2):
+            for i in range(0,3):
+                if self.plateaux[player][i].count(0) == 0:
+                    return True
+        return False
+
+    def game(self):
+        player = 1
+        while not(self.endGame()):
+            player = 1 - player
+            self.printPlate()
+            self.play(player)
+            self.enemyVerif(player)
+            self.point(player)
+             
+             
+         
+         
+         
